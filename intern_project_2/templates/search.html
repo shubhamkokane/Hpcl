@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <style>
+        #transportation {
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        #transportation td, #transportation th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #transportation tr:nth-child(even){background-color: #f2f2f2;}
+
+        #transportation tr:hover {background-color: #ddd;}
+
+        #transportation th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #7e7e7e;
+          color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <table>{{form.as_table}}</table>
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+</div>
+{% if transport %}
+<div style="overflow-x:auto;">
+    <table id="transportation">
+        <thead>
+        <th>Vehicle</th>
+        <th>Carrier</th>
+        <th>Location No</th>
+        <th>MCMU</th>
+        <th>Location</th>
+        <th>Customer Code</th>
+        <th>Zone</th>
+        <th>Quantity</th>
+        <th>RTKM</th>
+        <th>KL* KM</th>
+        <th>Amount</th>
+        <th>Load</th>
+        <th>Capacity</th>
+        <th>Rate</th>
+        <th>Cost</th>
+        </thead>
+        {% for i in transport %}
+        <tr>
+            <td>{{ i.vehicle }}</td>
+            <td>{{ i.carrier }}</td>
+            <td>{{ i.location_no }}</td>
+            <td>{{ i.mcmu }}</td>
+            <td>{{ i.location }}</td>
+            <td>{{ i.customer_code }}</td>
+            <td>{{ i.zone }}</td>
+            <td>{{ i.quantity }}</td>
+            <td>{{ i.rtkm }}</td>
+            <td>{{ i.klkm }}</td>
+            <td>{{ i.amount }}</td>
+            <td>{{ i.load }}</td>
+            <td>{{ i.capacity }}</td>
+            <td>{{ i.rate }}</td>
+            <td>{{ i.cost }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+</body>
+</html>
